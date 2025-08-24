@@ -41,6 +41,10 @@ android {
 }
 
 dependencies {
+    implementation(libs.material3)
+    implementation(libs.androidx.runtime.saveable)
+    implementation(libs.ui.tooling.preview)
+    debugImplementation(libs.ui.tooling)
     val navVersion = "2.9.3"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

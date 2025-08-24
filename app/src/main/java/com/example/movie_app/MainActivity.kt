@@ -8,7 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.example.movie_app.config.NavigationHost
-import com.example.movie_app.presentation.HomeScreen
+
+
 import com.example.movie_app.ui.theme.Movie_appTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,9 +19,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Movie_appTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    NavigationHost(
-
-                    )
+                    NavigationHost()
                 }
             }
         }

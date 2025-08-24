@@ -1,30 +1,27 @@
-package com.example.movie_app.presentation
+package com.example.movie_app.presentation.Home.composables
 
-
-import androidx.compose.ui.Modifier
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.navigation.compose.rememberNavController
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 
 sealed class BottomNavItem(val route: String, val icon: ImageVector, val label: String) {
     object Home : BottomNavItem("home", Icons.Default.Home, "Home")
     object Search : BottomNavItem("search", Icons.Default.Search, "Search")
-    object Profile : BottomNavItem("profile", Icons.Default.Person, "Profile")
 }
 
 @Composable
@@ -32,21 +29,23 @@ fun AppNavigationHost(navController: NavHostController) {
     NavHost(navController, startDestination = BottomNavItem.Home.route) {
         composable(BottomNavItem.Home.route) {
             Text(
-                "Home Screen"
+                "Home Screen",
+                modifier = Modifier
+                    .fillMaxSize()
+                    .wrapContentSize(),
             )
         }
         composable(BottomNavItem.Search.route) {
             Text(
-                "Search"
-            )
-        }
-        composable(BottomNavItem.Profile.route) {
-            Text(
-                "Profile"
+                "Search",
+                modifier = Modifier
+                    .fillMaxSize()
+                    .wrapContentSize(),
             )
         }
     }
 }
+
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
@@ -55,7 +54,7 @@ fun BottomNavigationBar(navController: NavController) {
         val currentRoute = navBackStackEntry?.destination?.route
 
         listOf(
-            BottomNavItem.Home, BottomNavItem.Search, BottomNavItem.Profile
+            BottomNavItem.Home, BottomNavItem.Search,
         ).forEach { item ->
             NavigationBarItem(
                 selected = currentRoute == item.route,
@@ -69,23 +68,4 @@ fun BottomNavigationBar(navController: NavController) {
                 label = { Text(item.label) })
         }
     }
-}
-
-@Composable
-fun HomeScreen(modifier: Modifier = Modifier, navController: NavController) {
-
-    val navController = rememberNavController();
-
-    Scaffold(
-        modifier = Modifier,
-        bottomBar = {
-            BottomNavigationBar(navController = navController)
-        }
-    ) { innerPadding ->
-        AppNavigationHost(
-            navController = navController,
-        )
-
-    }
-
 }
