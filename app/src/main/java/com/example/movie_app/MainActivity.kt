@@ -7,7 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.ViewModelProvider
 import com.example.movie_app.config.NavigationHost
+import com.example.movie_app.presentation.Home.controller.HomeViewModel
 
 
 import com.example.movie_app.ui.theme.Movie_appTheme
@@ -18,8 +20,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Movie_appTheme {
+
+                val homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    NavigationHost()
+                    NavigationHost(
+                        viewModel = homeViewModel
+                    )
                 }
             }
         }

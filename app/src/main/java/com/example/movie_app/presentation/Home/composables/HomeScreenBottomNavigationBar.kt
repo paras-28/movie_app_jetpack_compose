@@ -31,7 +31,6 @@ fun AppNavigationHost(navController: NavHostController) {
             Text(
                 "Home Screen",
                 modifier = Modifier
-                    .fillMaxSize()
                     .wrapContentSize(),
             )
         }
@@ -39,7 +38,6 @@ fun AppNavigationHost(navController: NavHostController) {
             Text(
                 "Search",
                 modifier = Modifier
-                    .fillMaxSize()
                     .wrapContentSize(),
             )
         }

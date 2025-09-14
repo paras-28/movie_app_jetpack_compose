@@ -6,11 +6,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.movie_app.presentation.Home.HomeScreen
+import com.example.movie_app.presentation.Home.controller.HomeViewModel
 import com.example.movie_app.presentation.LoginScreen
 
 
 @Composable
-fun NavigationHost() {
+fun NavigationHost(viewModel: HomeViewModel) {
 
     var navController = rememberNavController();
 
@@ -31,6 +32,7 @@ fun NavigationHost() {
 
             HomeScreen(
                 navController = navController,
+                viewModel = viewModel
             )
         }
     }
