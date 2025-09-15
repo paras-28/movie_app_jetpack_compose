@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,6 +28,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.movie_app.R
+import com.example.movie_app.presentation.composables.CustomTextField
+import com.example.movie_app.presentation.util.AppValidator
 
 
 @Composable
@@ -42,13 +43,18 @@ fun LoginScreen(modifier: Modifier = Modifier, navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .padding(20.dp),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        var username by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
+        var username: String by remember { mutableStateOf("") }
+        var usernameError: String by remember { mutableStateOf("") }
 
+        var password: String by remember { mutableStateOf("") }
+        var passwordError: String by remember { mutableStateOf("") }
 
+        Spacer(
+            modifier = Modifier.height(screenHeight * 0.3f)
+        )
         Image(
             painterResource(R.drawable.app_logo),
             contentDescription = "Login, Image",
@@ -62,21 +68,33 @@ fun LoginScreen(modifier: Modifier = Modifier, navController: NavController) {
         Spacer(
             modifier = Modifier.height(screenHeight * 0.02f)
         )
-        TextField(
+        CustomTextField(
+            modifier = modifier,
             value = username,
-            onValueChange = { username = it },
-            label = { Text("Username") },
-            modifier = Modifier.fillMaxWidth(),
-            singleLine = true
-        )
-        TextField(
+            onValueChange = {
+                username = it
+                usernameError = AppValidator.validateEmail(username) ?: ""
+            },
+            labelText = "Username",
+            error = usernameError,
+
+            )
+        /*     Spacer(
+                 modifier = Modifier.height(screenHeight * 0.02f)
+             )
+     */
+        CustomTextField(
+            modifier = modifier,
             value = password,
-            onValueChange = { password = it },
-            label = { Text("Password") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(56.dp),
-            singleLine = true
+            onValueChange = {
+                password = it
+                passwordError = AppValidator.validatePassword(password) ?: ""
+            },
+            labelText = "Password",
+            error = passwordError
+        )
+        Spacer(
+            modifier = Modifier.height(screenHeight * 0.02f)
         )
         Button(
             onClick = {
