@@ -2,9 +2,15 @@ package com.example.movie_app.presentation.Home
 
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.Card
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Home
@@ -40,9 +46,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import coil3.compose.AsyncImage
+import coil3.request.ImageRequest
 import com.example.movie_app.domain.common.NetworkResponse
 import com.example.movie_app.presentation.Home.composables.BottomNavigationBar
 import com.example.movie_app.presentation.Home.composables.NavigationItems
@@ -194,11 +203,30 @@ fun HomeScreen(
                 val popularMoviesResult by viewModel.popularMoviesResult.observeAsState()
 
                 when (val result = popularMoviesResult) {
-                    is NetworkResponse.Success -> Column() {
-                        Text(text = "Popular Movies:")
-                        Spacer(modifier = Modifier.height(8.dp))
-                        result.data.results.forEach { movie ->
-                            Text(text = movie.title ?: "No Title")
+                    is NetworkResponse.Success -> {
+                        LazyVerticalGrid(
+                            columns = GridCells.Fixed(2), // 2 columns like crossAxisCount in Flutter
+                            contentPadding = PaddingValues(8.dp)
+                        ) {
+                            items(result.data.results) { item ->
+                                Card(
+                                    modifier = Modifier.padding(8.dp)
+                                ) {
+                                    Column() {
+                                        AsyncImage(
+                                            model = ImageRequest.Builder(LocalContext.current)
+                                                .data("https://image.tmdb.org/t/p/w500${item.poster_path}")
+                                                .build(),
+                                            contentDescription = "Description",
+                                            modifier = Modifier.size(200.dp)
+                                        )
+                                        Text(
+                                            text = "Item ${item.title}",
+                                            modifier = Modifier.padding(16.dp)
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
 

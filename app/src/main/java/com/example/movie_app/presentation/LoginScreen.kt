@@ -25,7 +25,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.movie_app.R
 import com.example.movie_app.presentation.composables.CustomTextField
@@ -65,9 +68,19 @@ fun LoginScreen(modifier: Modifier = Modifier, navController: NavController) {
                 ),
             contentScale = ContentScale.Crop,
         )
+        Text(
+            text = "Movie App",
+            style = TextStyle(
+                fontSize = 24.sp,
+                fontWeight = FontWeight.W600
+            ),
+            modifier = Modifier.padding(8.dp)
+        )
+
         Spacer(
             modifier = Modifier.height(screenHeight * 0.02f)
         )
+
         CustomTextField(
             modifier = modifier,
             value = username,

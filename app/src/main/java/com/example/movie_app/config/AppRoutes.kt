@@ -17,7 +17,7 @@ fun NavigationHost(viewModel: HomeViewModel) {
 
     NavHost(
         navController = navController,
-        startDestination = Routes.LoginScreen,
+        startDestination = Routes.HomeScreen,
         modifier = Modifier
     ) {
 
