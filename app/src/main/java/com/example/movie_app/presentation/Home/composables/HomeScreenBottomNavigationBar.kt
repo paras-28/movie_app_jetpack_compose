@@ -18,6 +18,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.movie_app.presentation.Home.controller.HomeViewModel
 
 sealed class BottomNavItem(val route: String, val icon: ImageVector, val label: String) {
     object Home : BottomNavItem("home", Icons.Default.Home, "Home")
@@ -25,13 +26,14 @@ sealed class BottomNavItem(val route: String, val icon: ImageVector, val label: 
 }
 
 @Composable
-fun AppNavigationHost(navController: NavHostController) {
+fun AppNavigationHost(navController: NavHostController, viewModel: HomeViewModel) {
     NavHost(navController, startDestination = BottomNavItem.Home.route) {
         composable(BottomNavItem.Home.route) {
-            Text(
-                "Home Screen",
+            HomeScreenTabView(
                 modifier = Modifier
+                    .fillMaxSize()
                     .wrapContentSize(),
+                viewModel = viewModel
             )
         }
         composable(BottomNavItem.Search.route) {
