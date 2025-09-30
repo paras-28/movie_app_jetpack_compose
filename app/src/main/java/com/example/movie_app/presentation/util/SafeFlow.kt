@@ -12,6 +12,7 @@ import okio.IOException
 import retrofit2.HttpException
 
 
+/*
 fun <T> Flow<T>.safeFlow(): Flow<NetworkResponse<T>> {
     return this
         .map<T, NetworkResponse<T>> {
@@ -80,4 +81,4 @@ fun <T> Flow<T>.safeFlow(): Flow<NetworkResponse<T>> {
             }
             emit(NetworkResponse.Error(exception, errorCode))
         }
-}
+}*/

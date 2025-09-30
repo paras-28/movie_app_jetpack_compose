@@ -3,6 +3,7 @@ package com.example.movie_app.config.di
 
 import com.example.movie_app.data.MovieApiService
 import com.example.movie_app.data.MovieRepository
+import com.example.movie_app.data.MovieRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -46,14 +47,6 @@ object AppModule {
         return retrofit.create(MovieApiService::class.java)
     }
 
-    /*  @Provides
-      @Singleton
-      fun homeViewModel() : HomeViewModel{
-          return HomeViewModel();
-      }*/
-    /// single instance for HomeView model
-//    val homeViewModel: HomeViewModel by viewModels()
-
 
 }
 
@@ -66,6 +59,6 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindMovieRepository(
-        movieRepositoryImpl: MovieRepository
+        movieRepositoryImpl: MovieRepositoryImpl
     ): MovieRepository
 }

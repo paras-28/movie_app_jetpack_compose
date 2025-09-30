@@ -62,7 +62,7 @@ fun HomeScreenTabView(modifier: Modifier = Modifier, viewModel: HomeViewModel) {
         }
 
         is NetworkResponse.Error -> Text(result.toString(), color = Color.Red)
-        NetworkResponse.Loading -> CircularProgressIndicator()
+        is NetworkResponse.Loading -> CircularProgressIndicator()
         null -> Text(text = "No Data")
     }
 

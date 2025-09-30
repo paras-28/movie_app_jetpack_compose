@@ -25,7 +25,8 @@ class MovieRepositoryImpl @Inject constructor(
 
     override suspend fun getPopularMovies(
         page: Int,
-        language: String
+        language: String,
+        authorization: String
     ): NetworkResponse<MovieResModel> {
         return try {
             val response = apiService.getMovies(
@@ -38,12 +39,15 @@ class MovieRepositoryImpl @Inject constructor(
                 NetworkResponse.Success(response.body()!!)
             } else {
                 NetworkResponse.Error(
-                    AppException.AppException("API Error: ${response.message()}"),
+                    AppException("API Error: ${response.message()}"),
                     errorCode = response.code().toString()
                 )
             }
         } catch (e: Exception) {
-            NetworkResponse.Error(AppException)
+            NetworkResponse.Error(
+                AppException("Exception: ${e.message}", e),
+                errorCode = null
+            )
         }
     }
 }
