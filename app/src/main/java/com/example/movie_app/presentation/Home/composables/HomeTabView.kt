@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import com.example.movie_app.domain.common.NetworkResponse
-import com.example.movie_app.presentation.Home.controller.HomeViewModel
+import com.example.movie_app.presentation.Home.HomeViewModel.HomeViewModel
 
 @Composable
 fun HomeScreenTabView(modifier: Modifier = Modifier, viewModel: HomeViewModel) {

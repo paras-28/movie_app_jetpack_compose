@@ -10,11 +10,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 
 import com.example.movie_app.config.NavigationHost
-import com.example.movie_app.presentation.Home.controller.HomeViewModel
+import com.example.movie_app.presentation.Home.HomeViewModel.HomeViewModel
 
 
 import com.example.movie_app.ui.theme.Movie_appTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,10 +1,10 @@
-package com.example.movie_app.config.service_locator
+package com.example.movie_app.config.di
 
 
 
 
 
-import com.example.movie_app.data.AdviceApiService
+import com.example.movie_app.data.MovieApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -18,5 +18,5 @@ object RetrofitInstance {
             .build()
     }
 
-    val apiService: AdviceApiService = getInstance().create(AdviceApiService::class.java)
+    val apiService: MovieApiService = getInstance().create(MovieApiService::class.java)
 }

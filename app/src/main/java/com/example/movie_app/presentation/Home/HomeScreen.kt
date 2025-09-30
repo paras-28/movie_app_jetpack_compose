@@ -39,10 +39,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.movie_app.presentation.Home.HomeViewModel.HomeViewModel
 import com.example.movie_app.presentation.Home.composables.AppNavigationHost
 import com.example.movie_app.presentation.Home.composables.BottomNavigationBar
 import com.example.movie_app.presentation.Home.composables.NavigationItems
-import com.example.movie_app.presentation.Home.controller.HomeViewModel
 import kotlinx.coroutines.launch
 
 
