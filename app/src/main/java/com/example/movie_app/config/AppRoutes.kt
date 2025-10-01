@@ -16,9 +16,7 @@ fun NavigationHost(viewModel: HomeViewModel) {
     var navController = rememberNavController();
 
     NavHost(
-        navController = navController,
-        startDestination = Routes.HomeScreen,
-        modifier = Modifier
+        navController = navController, startDestination = Routes.HomeScreen, modifier = Modifier
     ) {
 
         composable<Routes.LoginScreen> {
@@ -28,11 +26,8 @@ fun NavigationHost(viewModel: HomeViewModel) {
         }
 
         composable<Routes.HomeScreen> {
-
-
             HomeScreen(
-                navController = navController,
-                viewModel = viewModel
+                navController = navController, viewModel = viewModel
             )
         }
     }

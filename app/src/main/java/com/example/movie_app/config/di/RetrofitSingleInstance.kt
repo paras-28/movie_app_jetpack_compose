@@ -2,6 +2,7 @@ package com.example.movie_app.config.di
 
 
 
+/*
 
 
 import com.example.movie_app.data.MovieApiService
@@ -19,4 +20,4 @@ object RetrofitInstance {
     }
 
     val apiService: MovieApiService = getInstance().create(MovieApiService::class.java)
-}
+}*/
