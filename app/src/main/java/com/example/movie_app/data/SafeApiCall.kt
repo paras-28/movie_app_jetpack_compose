@@ -4,11 +4,21 @@ import com.example.movie_app.domain.common.NetworkResponse
 import okio.IOException
 import retrofit2.HttpException
 
-suspend fun <T> safeApiCall(apiCall: suspend () -> T): NetworkResponse<T> {
+suspend fun <T> safeApiCall(apiCall: suspend () -> retrofit2.Response<T>): NetworkResponse<T> {
     return try {
         NetworkResponse.Loading(true)
         val response = apiCall.invoke()
-        NetworkResponse.Success(response)
+        if (response.isSuccessful && response.body() != null) {
+
+            NetworkResponse.Success(response.body()!!)
+        } else {
+            NetworkResponse.Error(
+                ClientException("Something went wrong"),
+                errorCode = "#ER${response.code()}"
+            );
+        }
+
+
     } catch (error: Throwable) {
         val exception = when (error) {
             is HttpException -> {
@@ -67,5 +77,19 @@ suspend fun <T> safeApiCall(apiCall: suspend () -> T): NetworkResponse<T> {
         NetworkResponse.Error(exception, errorCode)
     } finally {
         NetworkResponse.Loading(false)
+    }
+}
+
+/**
+ * Extension function for Retrofit Response to safely extract data
+ */
+fun <T> retrofit2.Response<T>.toNetworkResponse(): NetworkResponse<T> {
+    return if (this.isSuccessful && this.body() != null) {
+        NetworkResponse.Success(this.body()!!)
+    } else {
+        NetworkResponse.Error(
+            ClientException("API Error: ${this.message()}"),
+            errorCode = "#ER${this.code()}"
+        )
     }
 }
