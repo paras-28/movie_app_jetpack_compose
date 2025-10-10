@@ -15,6 +15,6 @@ sealed interface NetworkResponse<out T> {
 
     data class Loading(val status: Boolean) : NetworkResponse<Nothing>
 
-    data class Exception<T : Any>(val e: Throwable) : NetworkResponse<T>
+//    data class Exception<T : Any>(val e: Throwable) : NetworkResponse<T>
 }
 

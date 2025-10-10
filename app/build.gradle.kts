@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.runtime.livedata)
     implementation(libs.play.services.basement)
+    implementation(libs.androidx.compose.runtime)
     debugImplementation(libs.ui.tooling)
     val navVersion = "2.9.3"
     implementation(libs.androidx.core.ktx)
