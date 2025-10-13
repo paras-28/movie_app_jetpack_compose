@@ -29,6 +29,7 @@ class MovieRepositoryImpl @Inject constructor(
         authorization: String
     ): NetworkResponse<MovieResModel> {
 
+        println("api key: ${BuildConfig.API_KEY}");
         return safeApiCall {
             apiService.getMovies(
                 authorization = "Bearer ${BuildConfig.API_KEY}",
