@@ -7,9 +7,7 @@ import retrofit2.HttpException
 suspend fun <T> safeApiCall(apiCall: suspend () -> retrofit2.Response<T>): NetworkResponse<T> {
     return try {
         NetworkResponse.Loading(true)
-        println("user is here")
         val response = apiCall.invoke()
-        println("response: $response");
         if (response.isSuccessful && response.body() != null) {
 
             NetworkResponse.Success(response.body()!!)
