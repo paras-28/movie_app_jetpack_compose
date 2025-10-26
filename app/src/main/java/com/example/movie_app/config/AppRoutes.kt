@@ -2,18 +2,21 @@ package com.example.movie_app.config
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.example.movie_app.presentation.Home.HomeScreen
 import com.example.movie_app.presentation.Home.HomeViewModel.HomeViewModel
 import com.example.movie_app.presentation.LoginScreen
+import com.example.movie_app.presentation.movie_detail.MovieDetailScreen
 
 
 @Composable
 fun NavigationHost(viewModel: HomeViewModel) {
 
-    var navController = rememberNavController();
+    var navController: NavHostController = rememberNavController();
 
     NavHost(
         navController = navController, startDestination = Routes.HomeScreen, modifier = Modifier
@@ -30,7 +33,15 @@ fun NavigationHost(viewModel: HomeViewModel) {
                 navController = navController, viewModel = viewModel
             )
         }
+
+        composable<Routes.MovieDetailScreen> { backStackEntry ->
+            val movieDetailRoute = backStackEntry.toRoute<Routes.MovieDetailScreen>()
+            MovieDetailScreen(
+                movie = movieDetailRoute.movie,
+                navController = navController
+            )
+        }
+
+
     }
-
-
 }

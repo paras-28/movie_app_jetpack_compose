@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -26,14 +25,19 @@ sealed class BottomNavItem(val route: String, val icon: ImageVector, val label: 
 }
 
 @Composable
-fun AppNavigationHost(navController: NavHostController, viewModel: HomeViewModel) {
-    NavHost(navController, startDestination = BottomNavItem.Home.route) {
+fun BottomNavigationBarNavigationHost(
+    bottomNavigationController: NavHostController,
+    navigationController: NavHostController,
+    viewModel: HomeViewModel
+) {
+    NavHost(bottomNavigationController, startDestination = BottomNavItem.Home.route) {
         composable(BottomNavItem.Home.route) {
             HomeScreenTabView(
                 modifier = Modifier
                     .fillMaxSize()
                     .wrapContentSize(),
-                viewModel = viewModel
+                viewModel = viewModel,
+                navController = navigationController
             )
         }
         composable(BottomNavItem.Search.route) {
@@ -48,9 +52,9 @@ fun AppNavigationHost(navController: NavHostController, viewModel: HomeViewModel
 
 
 @Composable
-fun BottomNavigationBar(navController: NavController) {
+fun BottomNavigationBar(bottomNavigationController: NavHostController) {
     NavigationBar {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
+        val navBackStackEntry by bottomNavigationController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
 
         listOf(
@@ -59,8 +63,8 @@ fun BottomNavigationBar(navController: NavController) {
             NavigationBarItem(
                 selected = currentRoute == item.route,
                 onClick = {
-                    navController.navigate(item.route) {
-                        popUpTo(navController.graph.startDestinationId)
+                    bottomNavigationController.navigate(item.route) {
+                        popUpTo(bottomNavigationController.graph.startDestinationId)
                         launchSingleTop = true
                     }
                 },

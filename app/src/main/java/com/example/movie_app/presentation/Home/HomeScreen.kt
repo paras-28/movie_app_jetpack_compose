@@ -37,11 +37,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.movie_app.presentation.Home.HomeViewModel.HomeViewModel
-import com.example.movie_app.presentation.Home.composables.AppNavigationHost
 import com.example.movie_app.presentation.Home.composables.BottomNavigationBar
+import com.example.movie_app.presentation.Home.composables.BottomNavigationBarNavigationHost
 import com.example.movie_app.presentation.Home.composables.NavigationItems
 import kotlinx.coroutines.launch
 
@@ -50,9 +50,12 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    navController: NavController,
+    navController: NavHostController,
     viewModel: HomeViewModel
 ) {
+
+    // For Bottom Navigation Controller
+    val bottomNavController = rememberNavController();
 
     ///List of Navigation Items that will be clicked
     val items = listOf(
@@ -84,18 +87,10 @@ fun HomeScreen(
         mutableStateOf(0)
     }
 
-//Remember the State of the drawer. Closed/ Opened
+    //Remember the State of the drawer. Closed/ Opened
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
     val scope = rememberCoroutineScope()
-
-
-    // For Navigation Controller
-    val navController = rememberNavController();
-
-
-    /// api call
-
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -149,7 +144,7 @@ fun HomeScreen(
                     }
                 },
             bottomBar = {
-                BottomNavigationBar(navController = navController)
+                BottomNavigationBar(bottomNavigationController = bottomNavController)
             },
             modifier = modifier,
             topBar = { //TopBar to show title
@@ -173,19 +168,18 @@ fun HomeScreen(
                     }
                 )
             }
-        ) { innerPaddding ->
+        ) { innerPadding ->
             Column(
                 modifier = Modifier
-                    .padding(innerPaddding)
+                    .padding(innerPadding)
                     .padding(16.dp)
             )
             {
-                AppNavigationHost(
-                    navController = navController,
-                    viewModel = viewModel
+                BottomNavigationBarNavigationHost(
+                    bottomNavigationController = bottomNavController,
+                    viewModel = viewModel,
+                    navigationController = navController
                 )
-
-
             }
 
 
