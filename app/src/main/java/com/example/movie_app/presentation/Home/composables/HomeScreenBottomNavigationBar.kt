@@ -18,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.movie_app.presentation.Home.HomeViewModel.HomeViewModel
+import com.example.movie_app.presentation.sharedViewModel.MovieSharedMovieViewModel
 
 sealed class BottomNavItem(val route: String, val icon: ImageVector, val label: String) {
     object Home : BottomNavItem("home", Icons.Default.Home, "Home")
@@ -28,7 +29,8 @@ sealed class BottomNavItem(val route: String, val icon: ImageVector, val label: 
 fun BottomNavigationBarNavigationHost(
     bottomNavigationController: NavHostController,
     navigationController: NavHostController,
-    viewModel: HomeViewModel
+    viewModel: HomeViewModel,
+    movieSharedViewModel: MovieSharedMovieViewModel
 ) {
     NavHost(bottomNavigationController, startDestination = BottomNavItem.Home.route) {
         composable(BottomNavItem.Home.route) {
@@ -37,7 +39,9 @@ fun BottomNavigationBarNavigationHost(
                     .fillMaxSize()
                     .wrapContentSize(),
                 viewModel = viewModel,
-                navController = navigationController
+                navController = navigationController,
+                movieSharedViewModel = movieSharedViewModel
+
             )
         }
         composable(BottomNavItem.Search.route) {

@@ -37,7 +37,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.movie_app.presentation.Home.HomeViewModel.HomeViewModel
@@ -53,11 +52,9 @@ import kotlinx.coroutines.launch
 fun HomeScreen(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    viewModel: HomeViewModel
+    viewModel: HomeViewModel,
+    movieSharedViewModel: MovieSharedMovieViewModel
 ) {
-
-
-    val movieSharedViewModel: MovieSharedMovieViewModel = hiltViewModel()
 
     // For Bottom Navigation Controller
     val bottomNavController = rememberNavController();
@@ -183,7 +180,8 @@ fun HomeScreen(
                 BottomNavigationBarNavigationHost(
                     bottomNavigationController = bottomNavController,
                     viewModel = viewModel,
-                    navigationController = navController
+                    navigationController = navController,
+                    movieSharedViewModel = movieSharedViewModel
                 )
             }
 

@@ -37,7 +37,8 @@ import com.example.movie_app.presentation.sharedViewModel.MovieSharedMovieViewMo
 fun HomeScreenTabView(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel,
-    navController: NavController
+    navController: NavController,
+    movieSharedViewModel: MovieSharedMovieViewModel
 ) {
 
 //    // Trigger the API call when the Composable is first launched
@@ -46,8 +47,7 @@ fun HomeScreenTabView(
 //    }
 
 
-    // In HomeScreen
-    val sharedViewModel: MovieSharedMovieViewModel = hiltViewModel()
+
 
 
     // Collect state using StateFlow
@@ -85,7 +85,7 @@ fun HomeScreenTabView(
                             .clickable(
                                 onClick = {
                                     /// When clicking on a movie
-                                    sharedViewModel.selectMovie(movie)
+                                    movieSharedViewModel.selectMovie(movie)
                                     /// Navigate to detail screen
                                     navController.navigate(Routes.MovieDetailScreen)
                                 }

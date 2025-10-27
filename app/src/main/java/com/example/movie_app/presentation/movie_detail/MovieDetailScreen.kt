@@ -54,11 +54,11 @@ import com.example.movie_app.presentation.sharedViewModel.MovieSharedMovieViewMo
 @Composable
 fun  MovieDetailScreen(
     navController: NavController,
-//    movieSharedMovieViewModel: MovieSharedMovieViewModel
+    movieSharedViewModel: MovieSharedMovieViewModel
 ) {
-    val movieSharedMovieViewModel: MovieSharedMovieViewModel = hiltViewModel()
+
     // Get the selected movie from SharedViewModel
-    val movie by movieSharedMovieViewModel.selectedMovie.collectAsState()
+    val movie by movieSharedViewModel.selectedMovie.collectAsState()
 
     // Handle the case where no movie is selected (shouldn't happen in normal navigation)
     if (movie == null) {
