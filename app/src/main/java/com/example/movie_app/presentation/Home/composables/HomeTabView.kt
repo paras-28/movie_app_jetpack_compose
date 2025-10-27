@@ -23,12 +23,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import com.example.movie_app.config.Routes
 import com.example.movie_app.presentation.Home.HomeViewModel.HomeViewModel
 import com.example.movie_app.presentation.Home.HomeViewModel.MovieUiState
+import com.example.movie_app.presentation.sharedViewModel.MovieSharedMovieViewModel
 
 
 @Composable
@@ -42,6 +44,11 @@ fun HomeScreenTabView(
 //    LaunchedEffect(Unit) {
 //        viewModel.getData()
 //    }
+
+
+    // In HomeScreen
+    val sharedViewModel: MovieSharedMovieViewModel = hiltViewModel()
+
 
     // Collect state using StateFlow
     val movieState by viewModel.popularMoviesState.collectAsState()
@@ -77,10 +84,10 @@ fun HomeScreenTabView(
                             .padding(8.dp)
                             .clickable(
                                 onClick = {
-                                    // Navigate to MovieDetailScreen with the movie object
-                                    navController.navigate(
-                                        Routes.MovieDetailScreen(movie = movie)
-                                    )
+                                    /// When clicking on a movie
+                                    sharedViewModel.selectMovie(movie)
+                                    /// Navigate to detail screen
+                                    navController.navigate(Routes.MovieDetailScreen)
                                 }
                             )
                     ) {
