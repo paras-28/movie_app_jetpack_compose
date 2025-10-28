@@ -1,6 +1,7 @@
 package com.example.movie_app.presentation.movie_detail
 
 
+//import com.example.movie_app.presentation.shared.SharedMovieViewModel
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -42,17 +43,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
-//import com.example.movie_app.presentation.shared.SharedMovieViewModel
 import com.example.movie_app.presentation.sharedViewModel.MovieSharedMovieViewModel
+import com.example.movie_app.ui.theme.InterFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun  MovieDetailScreen(
+fun MovieDetailScreen(
     navController: NavController,
     movieSharedViewModel: MovieSharedMovieViewModel
 ) {
@@ -220,7 +220,10 @@ fun  MovieDetailScreen(
                     ) {
                         Text(
                             text = "Overview",
-                            style = MaterialTheme.typography.titleLarge,
+                            style = androidx.compose.ui.text.TextStyle(
+                                fontSize = 20.sp,
+                                fontFamily = InterFontFamily
+                            ),
                             fontWeight = FontWeight.Bold
                         )
 

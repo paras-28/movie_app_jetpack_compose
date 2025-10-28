@@ -22,6 +22,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -31,6 +32,7 @@ import com.example.movie_app.config.Routes
 import com.example.movie_app.presentation.Home.HomeViewModel.HomeViewModel
 import com.example.movie_app.presentation.Home.HomeViewModel.MovieUiState
 import com.example.movie_app.presentation.sharedViewModel.MovieSharedMovieViewModel
+import com.example.movie_app.ui.theme.InterFontFamily
 
 
 @Composable
@@ -101,6 +103,10 @@ fun HomeScreenTabView(
                             )
                             Text(
                                 text = "Item ${movie.title}",
+                                style = TextStyle(
+                                    fontFamily = InterFontFamily
+                                )
+                                ,
                                 modifier = Modifier.padding(16.dp)
                             )
                         }
