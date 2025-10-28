@@ -20,6 +20,7 @@ suspend fun <T> safeApiCall(apiCall: suspend () -> retrofit2.Response<T>): Netwo
 
 
     } catch (error: Throwable) {
+        println("error: ${error}");
         val exception = when (error) {
             is HttpException -> {
                 when (error.code()) {
